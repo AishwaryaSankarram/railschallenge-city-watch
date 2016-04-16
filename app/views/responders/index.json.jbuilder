@@ -1,6 +1,7 @@
 json.set! :responders do
   json.array! @responder  do |responder|
-    logger.debug
-    json.extract! responder, :type, :name, :capacity
+    ret_responder = responder.attributes
+    ret_responder[:type] =  responder[:rescue_type]
+    json.extract! ret_responder, :type, 'name', 'capacity'
   end
 end

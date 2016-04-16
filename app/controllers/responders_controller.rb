@@ -5,14 +5,14 @@ class RespondersController < ApplicationController
 
   def index
    @responder = Responder.all
-   render json: r
+   render 'responders/index'
   end
 
   def create
     @responder = Responder.new(responder_create_params)
     respond_to do |format|
       if @responder.save
-        format.json { render json: @responder }
+        format.json { render 'responders/show' }
       else
         format.json { render json: {responder: @responder.errors}, status: :unprocessable_entity }
       end
@@ -46,7 +46,9 @@ class RespondersController < ApplicationController
   end
 
   def responder_create_params
-    params.require(:responder).permit(:type, :name, :capacity)
+    p = params.require(:responder).permit(:type, :name, :capacity)
+    p[:rescue_type] = p[:type]
+    p.except!(:type)
   end
 
   def responder_update_params
