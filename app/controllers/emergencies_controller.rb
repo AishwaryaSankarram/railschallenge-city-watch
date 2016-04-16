@@ -32,7 +32,7 @@ class EmergenciesController < ApplicationController
       if @emergency.blank?
         render json: {message: 'Emergency Code does not exist'}
       else
-        if @emergency.update(emergency_update_params)
+        if @emergency.update_attributes(emergency_update_params)
           render 'emergencies/show'
         else
           render json: {emergency: frame_error_json(@emergency.errors)}, status: :unprocessable_entity
