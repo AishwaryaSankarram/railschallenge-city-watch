@@ -2,8 +2,9 @@ class CreateResponders < ActiveRecord::Migration
   def self.up
     create_table :responders do |t|
       t.string :type
-      t.string :status
-
+      t.string :name
+      t.integer :capacity
+      t.boolean :on_duty
       t.timestamps
     end
   end
