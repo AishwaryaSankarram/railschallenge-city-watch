@@ -1,10 +1,13 @@
 class CreateResponders < ActiveRecord::Migration
-  def change
+  def self.up
     create_table :responders do |t|
       t.string :type
-      t.integer :status
+      t.string :status
 
-      t.timestamps null: false
+      t.timestamps
     end
+  end
+  def self.down
+    drop_table :responders
   end
 end
